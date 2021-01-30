@@ -38,8 +38,11 @@ public class MessageAdapter extends ArrayAdapter<Message> implements View.OnClic
 
         viewHolder = new ViewHolder();
         LayoutInflater inflater = LayoutInflater.from(getContext());
-        convertView = inflater.inflate(R.layout.message_row, parent, false);
-
+        if (message.user.equals(LoginUser.loginUser.userName)) {
+            convertView = inflater.inflate(R.layout.message_row, parent, false);
+        } else {
+            convertView = inflater.inflate(R.layout.not_my_messages, parent, false);
+        }
         // connect Text views to the xml file
         viewHolder.userNameTextView = (TextView) convertView.findViewById(R.id.user_row_name);
         viewHolder.userEmailTextView = (TextView) convertView.findViewById(R.id.user_row_email);
@@ -50,7 +53,7 @@ public class MessageAdapter extends ArrayAdapter<Message> implements View.OnClic
         viewHolder.userNameTextView.setText(message.user);
         viewHolder.userEmailTextView.setText(message.message);
 
-        SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
+        SimpleDateFormat formatter = new SimpleDateFormat("HH:mm:ss");
         viewHolder.messageDateTextView.setText( String.valueOf(formatter.format( Long.valueOf( message.created))));
 
         // Load pictures from storage db , resize and tup to image view

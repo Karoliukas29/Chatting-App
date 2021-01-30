@@ -8,9 +8,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -25,12 +22,14 @@ import java.util.Date;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
 public class MainActivity extends AppCompatActivity {
     ListView listView;
     EditText messageTextField;
     Button sendMessage, loginButton;
     FirebaseFirestore db =FirebaseFirestore.getInstance();
-    LoginUser user = new LoginUser("", false);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,14 +50,18 @@ public class MainActivity extends AppCompatActivity {
                 if (TextUtils.isEmpty(messageTextField.getText().toString())) {
                     messageTextField.setError("Please Enter UserName!");
                 } else{
-                    user.isUserLogin = true;
-                    user.userName = messageTextField.getText().toString();
+                   // user.isUserLogin = true;
+                   // user.userName = messageTextField.getText().toString();
+
+                    LoginUser.loginUser.isUserLogin = true;
+                    LoginUser.loginUser.userName = messageTextField.getText().toString();
 
                     listView.setVisibility(View.VISIBLE);
                     sendMessage.setVisibility(View.VISIBLE);
                     loginButton.setVisibility(View.INVISIBLE);
                     messageTextField.setText("");
                     messageTextField.setHint("Type your Message");
+                    newUserJoined();
                 }
             }
         });
@@ -93,7 +96,9 @@ public class MainActivity extends AppCompatActivity {
         } else {
 
             Date date = new Date();
-            Message newMessage = new Message(messageField,String.valueOf(date.getTime()), user.userName);
+            //Message newMessage = new Message(messageField,String.valueOf(date.getTime()), user.userName);
+            Message newMessage = new Message(messageField,String.valueOf(date.getTime()), LoginUser.loginUser.userName);
+
             db.collection("Messages")
                     .add(newMessage)
                     .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
@@ -112,13 +117,40 @@ public class MainActivity extends AppCompatActivity {
                     });
         }
     }
+    public void newUserJoined(){
+
+        Date date = new Date();
+        String newUserJoined = "~" + LoginUser.loginUser.userName + " Has Joined The Chat ~";
+        Message newMessage = new Message(newUserJoined,String.valueOf(date.getTime()),
+                LoginUser.loginUser.userName);
+
+        db.collection("Messages")
+                .add(newMessage)
+                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                    @Override
+                    public void onSuccess(DocumentReference documentReference) {
+
+                        Log.d("TAG", "DocumentSnapshot written with ID: " + documentReference.getId());
+                        messageTextField.setText(""); // removes text from textField
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.w("TAG", "Error adding document", e);
+                    }
+                });
+    }
     public void GetMessagesFromDb(){
 
         ArrayList<Message> messagesFromDb = new ArrayList<>();
 
 
+
+
         db.collection("Messages")
-                .whereGreaterThan("created",user.userLoginTime)
+               // .whereGreaterThan("created",user.userLoginTime)
+                .whereGreaterThan("created",LoginUser.loginUser.userLoginTime)
                 .orderBy("created")
                  .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -145,6 +177,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         MessageAdapter messageAdapter = new MessageAdapter(msgfromdb,this);
+
         listView.setAdapter(messageAdapter);
 
     }

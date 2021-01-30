@@ -6,14 +6,16 @@ public class LoginUser {
     public String userName;
     public boolean isUserLogin;
     public  String userLoginTime;
+    public static LoginUser loginUser = new LoginUser("", false);
 
-    public LoginUser(String userName, boolean isUserLogin) {
+
+
+    private LoginUser(String userName, boolean isUserLogin) {
         this.userName = userName;
         this.isUserLogin = isUserLogin;
 
 
         Date date = new Date();
-       // SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
         userLoginTime = String.valueOf(date.getTime());
     }
 
