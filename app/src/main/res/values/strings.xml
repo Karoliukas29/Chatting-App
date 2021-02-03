@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">ChattingApp</string>
+    <string-array name="Categories">
+        <item>Main</item>
+        <item>Gym</item>
+        <item>Basketball</item>
+        <item>Football</item>
+        <item>Tennis</item>
+        <item>Boxing</item>
+    </string-array>
 </resources>

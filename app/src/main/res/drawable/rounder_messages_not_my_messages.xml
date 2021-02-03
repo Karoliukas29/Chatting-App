@@ -7,5 +7,5 @@
         android:color="#019789" />
     // set color and width of border
     <solid android:color="#019789"
-        /> // inner bgcolor
+        />
 </shape>

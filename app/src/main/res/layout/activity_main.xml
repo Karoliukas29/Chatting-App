@@ -50,27 +50,28 @@
     <ListView
 
         android:id="@+id/listview"
-        android:layout_marginLeft="3dp"
-        android:layout_marginRight="3dp"
         android:layout_width="match_parent"
-        android:layout_height="642dp"
+        android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"
-        android:background="#ebeff2"
+        android:layout_marginLeft="3dp"
+        android:layout_marginTop="42dp"
+        android:layout_marginEnd="0dp"
+        android:layout_marginRight="0dp"
         android:layout_marginBottom="89dp"
+        android:background="#ebeff2"
+        android:divider="@null"
+        android:dividerHeight="3.5dp"
         android:stackFromBottom="true"
         android:transcriptMode="alwaysScroll"
         app:layout_constraintBottom_toTopOf="@+id/editTextTextMultiLine"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:divider="@null"
-        android:dividerHeight="3.5dp"
+        app:layout_constraintTop_toTopOf="parent">
 
-
-        />
+    </ListView>
 
     <Button
         android:id="@+id/login_btn"
@@ -86,6 +87,48 @@
         android:layout_marginBottom="33dp"
         android:layout_toEndOf="@+id/editTextTextMultiLine"
         android:layout_toRightOf="@+id/editTextTextMultiLine"
-        android:text="Login" />
+        android:text="Login"
+        />
+
+    <ListView
+        android:id="@+id/listview2"
+        android:layout_width="wrap_content"
+        android:layout_height="123dp"
+        android:layout_below="@+id/number_Of_Users"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginLeft="13dp"
+        android:layout_marginTop="3dp"
+        android:layout_marginEnd="12dp"
+        android:layout_marginRight="12dp"
+        android:background="#ebeff2"
+        android:divider="@null"
+
+
+        android:stackFromBottom="true"
+        android:transcriptMode="alwaysScroll" />
+
+    <Button
+        android:id="@+id/number_Of_Users"
+        android:layout_width="82dp"
+        android:layout_height="37dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginEnd="15dp"
+        android:layout_marginRight="15dp"
+        android:text="Users" />
+
+    <Spinner
+        android:id="@+id/dropdown_menu"
+        android:layout_width="wrap_content"
+        android:layout_height="36dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_marginStart="9dp"
+        android:layout_marginLeft="9dp"
+        android:layout_marginEnd="195dp"
+        android:layout_marginRight="195dp"
+        android:layout_toStartOf="@+id/number_Of_Users"
+        android:layout_toLeftOf="@+id/number_Of_Users" />
 
 </RelativeLayout>

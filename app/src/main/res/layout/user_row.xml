@@ -44,7 +44,7 @@
                 android:textStyle="italic" />
 
             <TextView
-                android:id="@+id/message_row_date"
+                android:id="@+id/user_row_date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="right"
@@ -55,27 +55,6 @@
 
 
         </LinearLayout>
-
-        <TextView
-            android:id="@+id/user_row_email"
-            style="@android:style/Widget.Holo.Light.TextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="right"
-            android:layout_marginRight="3dp"
-            android:layout_marginLeft="3dp"
-            android:paddingLeft="20dp"
-            android:paddingRight="20dp"
-            android:fontFamily="sans-serif"
-            android:text="MessageText"
-            android:textColor="@color/white"
-            android:textSize="15sp"
-            android:textStyle="normal"
-            android:background="@drawable/rounded_corner"
-
-            />
-
-
     </LinearLayout>
 
 
